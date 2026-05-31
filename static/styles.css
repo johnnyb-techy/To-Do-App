@@ -1,0 +1,268 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --color-primary: #3b82f6;
+    --color-success: #10b981;
+    --color-danger: #ef4444;
+    --color-bg: #f9fafb;
+    --color-card: #ffffff;
+    --color-text: #1f2937;
+    --color-text-light: #6b7280;
+    --color-border: #e5e7eb;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: var(--spacing-lg);
+    min-height: 100vh;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 2px solid var(--color-border);
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-primary);
+}
+
+.header p {
+    color: var(--color-text-light);
+    font-size: 0.95rem;
+}
+
+.form-section {
+    background-color: var(--color-card);
+    padding: var(--spacing-md);
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    margin-bottom: var(--spacing-lg);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--color-text);
+}
+
+input[type="text"],
+textarea {
+    display: block;
+    width: 100%;
+    padding: var(--spacing-sm);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.2s;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+button[type="submit"] {
+    padding: var(--spacing-sm) var(--spacing-md);
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button[type="submit"]:hover {
+    background-color: #2563eb;
+}
+
+button[type="submit"]:active {
+    transform: scale(0.98);
+}
+
+.todo-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.empty-state {
+    text-align: center;
+    padding: var(--spacing-lg);
+    color: var(--color-text-light);
+    font-style: italic;
+}
+
+.todo-item {
+    background-color: var(--color-card);
+    padding: var(--spacing-md);
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+    transition: all 0.2s;
+}
+
+.todo-item:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+.todo-item input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-top: 3px;
+    cursor: pointer;
+    accent-color: var(--color-success);
+}
+
+.todo-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.todo-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: var(--spacing-xs);
+    word-wrap: break-word;
+}
+
+.todo-item.completed .todo-title {
+    text-decoration: line-through;
+    color: var(--color-text-light);
+}
+
+.todo-description {
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+    margin-bottom: var(--spacing-xs);
+}
+
+.todo-meta {
+    font-size: 0.8rem;
+    color: #9ca3af;
+}
+
+.todo-actions {
+    display: flex;
+    gap: var(--spacing-xs);
+    align-items: center;
+}
+
+/* Keep forms inside actions inline without inline style attributes */
+.todo-actions form {
+    display: inline-block;
+    margin: 0;
+}
+
+/* Unified button sizing for Edit and Delete */
+button.btn-edit,
+button.btn-delete,
+.btn-edit,
+.btn-delete {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 8px 14px;
+    min-height: 36px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-family: inherit;
+    line-height: 1;
+    cursor: pointer;
+    transition: background-color 0.15s, transform 0.06s;
+}
+
+/* Edit (primary) — blue outline */
+.btn-edit,
+button.btn-edit {
+    color: var(--color-primary);
+    background: transparent;
+    border: 1px solid var(--color-primary);
+    text-decoration: none;
+}
+
+.btn-edit:hover {
+    background-color: rgba(59,130,246,0.08);
+    transform: translateY(-1px);
+}
+
+/* Delete (danger) — solid red */
+.btn-delete,
+button.btn-delete {
+    color: white;
+    background-color: var(--color-danger);
+    border: 1px solid var(--color-danger);
+}
+
+.btn-delete:hover {
+    background-color: #dc2626;
+    transform: translateY(-1px);
+}
+
+/* Ensure delete buttons (which are submit buttons) do not inherit the general submit hover color */
+button.btn-delete:hover,
+button[type="submit"].btn-delete:hover {
+    background-color: #b91c1c; /* slightly darker red */
+    border-color: #991b1b;
+    color: #fff;
+}
+
+@media (max-width: 640px) {
+    .container {
+        padding: var(--spacing-md);
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    .todo-item {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+    
+    .todo-actions {
+        width: 100%;
+    }
+}

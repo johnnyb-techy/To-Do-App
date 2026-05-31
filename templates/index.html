@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Todo App</title>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>To Do App</h1>
+            <p>A Baillie Learning Project</p>
+        </div>
+        
+        <div class="form-section">
+            <form method="POST" action="{{ url_for('add_todo') }}">
+                <div>
+                    <label for="title">To do Task:</label>
+                    <input 
+                        type="text" 
+                        id="title" 
+                        name="title" 
+                        placeholder="Enter a new todo..."
+                        required
+                    >
+                </div>
+                
+                <div>
+                    <label for="description">Description (optional):</label>
+                    <textarea 
+                        id="description" 
+                        name="description" 
+                        placeholder="Add more details..."
+                    ></textarea>
+                </div>
+                
+                <button type="submit">Add Todo</button>
+            </form>
+        </div>
+        
+        <div class="todo-list">
+            {% if todos %}
+                {% for todo in todos %}
+                    {% if todo.completed %}
+                    <div class="todo-item completed">
+                    {% else %}
+                    <div class="todo-item">
+                    {% endif %}
+                        
+                        {% if todo.completed %}
+                        <input 
+                            type="checkbox" 
+                            class="toggle-checkbox"
+                            checked
+                            data-todo-id="{{ todo.id }}"
+                        />
+                        {% else %}
+                        <input 
+                            type="checkbox" 
+                            class="toggle-checkbox"
+                            data-todo-id="{{ todo.id }}"
+                        />
+                        {% endif %}
+                        
+                        <div class="todo-content">
+                            <div class="todo-title">{{ todo.title }}</div>
+                            
+                            {% if todo.description %}
+                                <div class="todo-description">{{ todo.description }}</div>
+                            {% endif %}
+                            
+                            <div class="todo-meta">
+                                Created: {{ todo.created_at.strftime('%Y-%m-%d %H:%M') }}
+                            </div>
+                        </div>
+                        
+                        <div class="todo-actions">
+                            <a class="btn-edit" href="{{ url_for('edit_todo', todo_id=todo.id) }}" role="button">Edit</a>
+
+                            <form method="POST" action="{{ url_for('delete_todo', todo_id=todo.id) }}">
+                                <button type="submit" class="btn-delete">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                {% endfor %}
+            
+            {% else %}
+                <div class="empty-state">
+                    <p>No todos yet! Add one above to get started. 🚀</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
